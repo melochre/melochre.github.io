@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Overview">
+<meta name="application-name" content="Overview">
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiB2aWV3Qm94PSIwIDAgMTkyIDE5MiI+CiAgPHJlY3Qgd2lkdGg9IjE5MiIgaGVpZ2h0PSIxOTIiIHJ4PSIzNiIgZmlsbD0iIzBmMGYwZiIvPgogIDwhLS0gR3JpZCBsaW5lcyAtLT4KICA8bGluZSB4MT0iMjQiIHkxPSIxNTYiIHgyPSIxNjgiIHkyPSIxNTYiIHN0cm9rZT0iIzFlMWUxZSIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPGxpbmUgeDE9IjI0IiB5MT0iMzYiIHgyPSIyNCIgeTI9IjE1NiIgc3Ryb2tlPSIjMWUxZTFlIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8IS0tIEJhcnMgLS0+CiAgPHJlY3QgeD0iMzYiIHk9IjEwMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjU2IiByeD0iNCIgZmlsbD0iIzFlMWUxZSIvPgogIDxyZWN0IHg9IjM2IiB5PSIxMjAiIHdpZHRoPSIyMCIgaGVpZ2h0PSIzNiIgcng9IjQiIGZpbGw9IiNjOGZmNDciLz4KICA8cmVjdCB4PSI2NCIgeT0iODAiIHdpZHRoPSIyMCIgaGVpZ2h0PSI3NiIgcng9IjQiIGZpbGw9IiMxZTFlMWUiLz4KICA8cmVjdCB4PSI2NCIgeT0iMTAwIiB3aWR0aD0iMjAiIGhlaWdodD0iNTYiIHJ4PSI0IiBmaWxsPSIjYzhmZjQ3Ii8+CiAgPHJlY3QgeD0iOTIiIHk9IjYwIiB3aWR0aD0iMjAiIGhlaWdodD0iOTYiIHJ4PSI0IiBmaWxsPSIjMWUxZTFlIi8+CiAgPHJlY3QgeD0iOTIiIHk9IjkwIiB3aWR0aD0iMjAiIGhlaWdodD0iNjYiIHJ4PSI0IiBmaWxsPSIjYzhmZjQ3Ii8+CiAgPHJlY3QgeD0iMTIwIiB5PSI3MCIgd2lkdGg9IjIwIiBoZWlnaHQ9Ijg2IiByeD0iNCIgZmlsbD0iIzFlMWUxZSIvPgogIDxyZWN0IHg9IjEyMCIgeT0iMTEwIiB3aWR0aD0iMjAiIGhlaWdodD0iNDYiIHJ4PSI0IiBmaWxsPSIjYzhmZjQ3Ii8+CiAgPHJlY3QgeD0iMTQ4IiB5PSI1MCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjEwNiIgcng9IjQiIGZpbGw9IiMxZTFlMWUiLz4KICA8cmVjdCB4PSIxNDgiIHk9IjgwIiB3aWR0aD0iMjAiIGhlaWdodD0iNzYiIHJ4PSI0IiBmaWxsPSIjYzhmZjQ3Ii8+Cjwvc3ZnPg==">
+<title>Overview</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #080808;
+    --surface: #111;
+    --surface2: #181818;
+    --border: #222;
+    --accent: #c8ff47;
+    --accent-dim: rgba(200,255,71,0.10);
+    --text: #e8e8e8;
+    --text-dim: #555;
+    --text-mid: #888;
+    --red: #ff4f4f;
+    --blue: #47b8ff;
+    --orange: #ffaa47;
+    --green: #47ff91;
+    --purple: #a78bfa;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh; padding-bottom: 40px;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  header {
+    padding: 18px 18px 12px; border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; background: var(--bg); z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .header-left h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; color: var(--accent); }
+  .header-left .date { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); margin-top: 2px; }
+
+  /* WEEK SELECTOR */
+  .week-selector {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 18px; border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .week-btn { padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--text-mid); font-family: 'JetBrains Mono', monospace; font-size: 12px; cursor: pointer; }
+  .week-btn:active { background: var(--surface2); }
+  .week-label { flex: 1; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-mid); }
+  .week-now { padding: 6px 10px; border-radius: 8px; border: 1px solid #c8ff4733; background: var(--accent-dim); color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 11px; cursor: pointer; }
+
+  /* TODAY PANEL */
+  .today-panel { border-bottom: 1px solid var(--border); padding: 14px 18px; }
+  .panel-title { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 12px; }
+  .today-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .today-cell { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; }
+  .today-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+  .today-val { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 500; line-height: 1; }
+  .today-sub { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); margin-top: 3px; }
+  .today-bar { height: 3px; background: var(--border); border-radius: 2px; margin-top: 6px; overflow: hidden; }
+  .today-bar-fill { height: 100%; border-radius: 2px; transition: width 0.3s; }
+
+  /* MACRO BARS */
+  .macro-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .macro-lbl { font-family: 'JetBrains Mono', monospace; font-size: 9px; width: 46px; color: var(--text-dim); flex-shrink: 0; }
+  .macro-track { flex: 1; height: 4px; background: var(--border); border-radius: 2px; }
+  .macro-fill { height: 100%; border-radius: 2px; transition: width 0.3s; }
+  .macro-val { font-family: 'JetBrains Mono', monospace; font-size: 9px; width: 80px; text-align: right; flex-shrink: 0; }
+
+  /* CHART CARDS */
+  .chart-card { margin: 14px 18px 0; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px; }
+  .chart-title { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 12px; }
+
+  /* WEEK STATS */
+  .week-stats { margin: 14px 18px 0; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+  .week-stats-header { background: var(--surface); padding: 12px 16px; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim); border-bottom: 1px solid var(--border); }
+  .week-stats-grid { display: grid; grid-template-columns: 1fr 1fr; }
+  .ws-cell { padding: 12px 16px; border-bottom: 1px solid #161616; border-right: 1px solid #161616; }
+  .ws-cell:nth-child(2n) { border-right: none; }
+  .ws-cell:nth-last-child(-n+2) { border-bottom: none; }
+  .ws-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+  .ws-val { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 500; line-height: 1; }
+  .ws-sub { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); margin-top: 3px; }
+
+  /* DAILY LOG TABLE */
+  .day-log { margin: 14px 18px 0; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+  .day-log-header { background: var(--surface); padding: 12px 16px; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; }
+  .day-row { display: grid; grid-template-columns: 48px 1fr 1fr 1fr 1fr; padding: 8px 16px; border-bottom: 1px solid #161616; align-items: center; gap: 4px; }
+  .day-row:last-child { border-bottom: none; }
+  .day-row.header-row { background: var(--surface2); }
+  .day-col { font-family: 'JetBrains Mono', monospace; font-size: 10px; }
+  .day-col.label { color: var(--text-dim); font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .day-col.day-name { color: var(--text-mid); font-size: 11px; }
+  .day-col.today-row { color: var(--accent); }
+  .col-cal { color: var(--accent); }
+  .col-prot { color: var(--blue); }
+  .col-fibre { color: var(--green); }
+  .col-deficit { color: var(--green); }
+  .col-deficit.surplus { color: var(--red); }
+  .col-zero { color: #333; }
+
+  /* ALCOHOL */
+  .alcohol-row { display: flex; align-items: center; gap: 8px; padding: 8px 16px; border-bottom: 1px solid #161616; }
+  .alcohol-row:last-child { border-bottom: none; }
+  .alc-day { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-mid); width: 48px; }
+  .alc-dots { display: flex; gap: 4px; flex-wrap: wrap; }
+  .alc-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--orange); opacity: 0.8; }
+  .alc-zero { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #2a2a2a; }
+
+  /* EXERCISE LOG */
+  .ex-row { padding: 8px 16px; border-bottom: 1px solid #161616; }
+  .ex-row:last-child { border-bottom: none; }
+  .ex-day { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-mid); margin-bottom: 3px; }
+  .ex-items { display: flex; flex-wrap: wrap; gap: 4px; }
+  .ex-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; padding: 2px 7px; border-radius: 20px; border: 1px solid var(--border); color: var(--text-dim); background: var(--surface); }
+  .ex-tag.cardio { border-color: #c8ff4733; color: var(--accent); background: var(--accent-dim); }
+  .ex-tag.bw { border-color: #ffaa4733; color: var(--orange); background: rgba(255,170,71,0.08); }
+  .ex-none { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #2a2a2a; }
+
+  .section-spacer { height: 14px; }
+
+  /* VIEW TOGGLE */
+  .view-toggle { display: flex; gap: 0; margin: 10px 18px 0; background: var(--surface); border-radius: 10px; padding: 3px; border: 1px solid var(--border); }
+  .view-btn { flex: 1; padding: 8px; border: none; background: transparent; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; font-size: 11px; border-radius: 7px; cursor: pointer; transition: all 0.2s; }
+  .view-btn.active { background: var(--surface2); color: var(--accent); border: 1px solid #c8ff4733; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <h1>OVERVIEW</h1>
+    <div class="date" id="dateDisplay"></div>
+  </div>
+  <button class="week-now" onclick="goToCurrentWeek()">this week</button>
+</header>
+
+<div class="week-selector">
+  <button class="week-btn" onclick="prevPeriod()">‹ prev</button>
+  <div class="week-label" id="weekLabel"></div>
+  <button class="week-btn" onclick="nextPeriod()">next ›</button>
+</div>
+
+<div class="view-toggle">
+  <button class="view-btn active" id="btnWeek" onclick="setView('week')">Week</button>
+  <button class="view-btn" id="btnMonth" onclick="setView('month')">Month</button>
+</div>
+
+<!-- TODAY LIVE -->
+<div class="today-panel">
+  <div class="panel-title" style="color:var(--accent)">Today — Live</div>
+  <div class="today-grid" id="todayGrid"></div>
+  <div class="section-spacer"></div>
+  <div class="macro-row">
+    <div class="macro-lbl" style="color:var(--accent)">cal</div>
+    <div class="macro-track"><div class="macro-fill" style="background:var(--accent)" id="liveCal" style="width:0%"></div></div>
+    <div class="macro-val" style="color:var(--accent)" id="liveCalVal">—</div>
+  </div>
+  <div class="macro-row">
+    <div class="macro-lbl" style="color:var(--blue)">protein</div>
+    <div class="macro-track"><div class="macro-fill" style="background:var(--blue)" id="liveProt" style="width:0%"></div></div>
+    <div class="macro-val" style="color:var(--blue)" id="liveProtVal">—</div>
+  </div>
+  <div class="macro-row">
+    <div class="macro-lbl" style="color:var(--green)">fibre</div>
+    <div class="macro-track"><div class="macro-fill" style="background:var(--green)" id="liveFibre" style="width:0%"></div></div>
+    <div class="macro-val" style="color:var(--green)" id="liveFibreVal">—</div>
+  </div>
+  <div class="macro-row">
+    <div class="macro-lbl" style="color:var(--purple)">water</div>
+    <div class="macro-track"><div class="macro-fill" style="background:var(--purple)" id="liveWater" style="width:0%"></div></div>
+    <div class="macro-val" style="color:var(--purple)" id="liveWaterVal">—</div>
+  </div>
+</div>
+
+<!-- WEIGHT CHART -->
+<div class="chart-card">
+  <div class="chart-title">Weight — 7 days (AM · PM)</div>
+  <canvas id="weightChart" height="130"></canvas>
+</div>
+
+<!-- CALORIES CHART -->
+<div class="chart-card">
+  <div class="chart-title">Calories in vs target (1,450)</div>
+  <canvas id="calChart" height="110"></canvas>
+</div>
+
+<!-- DEFICIT CHART -->
+<div class="chart-card">
+  <div class="chart-title">Net deficit / surplus</div>
+  <canvas id="deficitChart" height="100"></canvas>
+</div>
+
+<!-- PROTEIN + FIBRE -->
+<div style="display:flex;gap:12px;margin:14px 18px 0">
+  <div style="flex:1;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px">
+    <div class="chart-title">Protein (g)</div>
+    <canvas id="protChart" height="120"></canvas>
+  </div>
+  <div style="flex:1;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px">
+    <div class="chart-title">Fibre (g)</div>
+    <canvas id="fibreChart" height="120"></canvas>
+  </div>
+</div>
+
+<!-- WATER CHART -->
+<div class="chart-card">
+  <div class="chart-title">Water (ml) · target 3,500ml</div>
+  <canvas id="waterChart" height="90"></canvas>
+</div>
+
+<!-- ALCOHOL -->
+<div class="day-log" style="margin-top:14px">
+  <div class="day-log-header"><span>Alcohol</span><span style="color:var(--orange)">standard drinks</span></div>
+  <div id="alcoholLog"></div>
+</div>
+
+<!-- WEEK STATS -->
+<div class="week-stats">
+  <div class="week-stats-header">Week Summary</div>
+  <div class="week-stats-grid" id="weekStats"></div>
+</div>
+
+<!-- DAILY LOG TABLE -->
+<div class="day-log">
+  <div class="day-log-header">
+    <span>Daily Log</span>
+    <span style="color:var(--text-dim);font-size:8px">cal · protein · fibre · deficit</span>
+  </div>
+  <div class="day-row header-row">
+    <div class="day-col label">day</div>
+    <div class="day-col label">cal</div>
+    <div class="day-col label">prot</div>
+    <div class="day-col label">fibre</div>
+    <div class="day-col label">deficit</div>
+  </div>
+  <div id="dailyLogRows"></div>
+</div>
+
+<!-- EXERCISE LOG -->
+<div class="day-log" style="margin-top:14px;margin-bottom:14px">
+  <div class="day-log-header"><span>Exercise Log</span></div>
+  <div id="exerciseLog"></div>
+</div>
+
+<script>
+const FOOD_KEY = 'macros_v1';
+const SUPPS_KEY = 'stack_v2';
+const BODY_KEY = 'body_v1';
+const TOTALS_KEY = 'daily_totals';
+const HISTORY_KEY = 'daily_history';
+const WEIGHT_HISTORY_KEY = 'body_weight_history';
+const TARGETS = { cal: 1450, protein: 150, fibre: 50, water: 3500 };
+
+let weekOffset = 0;
+let viewMode = 'week'; // 'week' or 'month'
+let monthOffset = 0;
+let charts = {};
+
+function setView(mode) {
+  viewMode = mode;
+  document.getElementById('btnWeek').classList.toggle('active', mode === 'week');
+  document.getElementById('btnMonth').classList.toggle('active', mode === 'month');
+  renderAll();
+}
+
+function prevPeriod() {
+  if (viewMode === 'week') { weekOffset--; }
+  else { monthOffset--; }
+  renderAll();
+}
+
+function nextPeriod() {
+  if (viewMode === 'week') { if (weekOffset < 0) weekOffset++; }
+  else { if (monthOffset < 0) monthOffset++; }
+  renderAll();
+}
+
+function goToCurrentWeek() { weekOffset = 0; monthOffset = 0; renderAll(); }
+
+function getTodayKey() {
+  const now = new Date();
+  return `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+}
+
+function getWeekDates(offset) {
+  const now = new Date();
+  const day = now.getDay();
+  const monday = new Date(now);
+  monday.setDate(now.getDate() - ((day === 0 ? 7 : day) - 1) + (offset * 7));
+  monday.setHours(0,0,0,0);
+  const dates = [];
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(monday);
+    d.setDate(monday.getDate() + i);
+    const key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    dates.push({ key, label: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'][i], date: d });
+  }
+  return dates;
+}
+
+function getMonthDates(offset) {
+  const now = new Date();
+  const target = new Date(now.getFullYear(), now.getMonth() + offset, 1);
+  const year = target.getFullYear();
+  const month = target.getMonth();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const dates = [];
+  const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  for (let i = 1; i <= daysInMonth; i++) {
+    const d = new Date(year, month, i);
+    const key = `${year}-${String(month+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;
+    dates.push({ key, label: String(i), dayName: dayNames[d.getDay()], date: d });
+  }
+  return dates;
+}
+
+function loadHistory() {
+  try { return JSON.parse(localStorage.getItem(HISTORY_KEY)) || []; } catch { return []; }
+}
+
+function loadWeightHistory() {
+  try { return JSON.parse(localStorage.getItem(WEIGHT_HISTORY_KEY)) || []; } catch { return []; }
+}
+
+function loadLive() {
+  try { return JSON.parse(localStorage.getItem(TOTALS_KEY)) || {}; } catch { return {}; }
+}
+
+function getHistoryForDate(history, dateKey) {
+  return history.find(d => d.date === dateKey) || null;
+}
+
+function loadBodyState() {
+  try { return JSON.parse(localStorage.getItem(BODY_KEY)) || {}; } catch { return {}; }
+}
+
+// ─── TODAY LIVE PANEL ────────────────────────────────────────────────
+function renderToday() {
+  const live = loadLive();
+  const today = getTodayKey();
+  const bodyState = loadBodyState();
+
+  const totalCal = (live.foodCal || 0) + (live.suppsCal || 0);
+  const totalProt = (live.foodProtein || 0) + (live.suppsProtein || 0);
+  const totalFibre = (live.foodFibre || 0) + (live.suppsFibre || 0);
+  const water = live.foodWater || 0;
+  const burned = live.burned || bodyState.fitbit?.cal || 0;
+  const deficit = burned > 0 ? burned - totalCal : null;
+  const weightAM = live.weightAM || bodyState.weight?.am?.val || null;
+  const steps = live.steps || bodyState.fitbit?.steps || 0;
+  const sleepH = live.sleepHours || bodyState.sleep?.hours || 0;
+
+  // Big cells
+  document.getElementById('todayGrid').innerHTML = `
+    <div class="today-cell">
+      <div class="today-label">Weight AM</div>
+      <div class="today-val" style="color:var(--accent)">${weightAM ? weightAM + 'kg' : '—'}</div>
+      <div class="today-sub">morning</div>
+    </div>
+    <div class="today-cell">
+      <div class="today-label">Net Deficit</div>
+      <div class="today-val" style="color:${deficit === null ? 'var(--text-dim)' : deficit >= 0 ? 'var(--green)' : 'var(--red)'}">${deficit === null ? '—' : (deficit >= 0 ? '+' : '') + Math.round(deficit)}</div>
+      <div class="today-sub">${burned > 0 ? burned.toLocaleString() + ' burned' : 'no Fitbit data'}</div>
+    </div>
+    <div class="today-cell">
+      <div class="today-label">Steps</div>
+      <div class="today-val" style="color:var(--blue)">${steps > 0 ? steps.toLocaleString() : '—'}</div>
+      <div class="today-sub">today</div>
+    </div>
+    <div class="today-cell">
+      <div class="today-label">Sleep</div>
+      <div class="today-val" style="color:var(--purple)">${sleepH > 0 ? sleepH + 'h' : '—'}</div>
+      <div class="today-sub">last night</div>
+    </div>
+  `;
+
+  // Macro bars
+  const pCal = Math.min((totalCal / TARGETS.cal) * 100, 100);
+  const pProt = Math.min((totalProt / TARGETS.protein) * 100, 100);
+  const pFibre = Math.min((totalFibre / TARGETS.fibre) * 100, 100);
+  const pWater = Math.min((water / TARGETS.water) * 100, 100);
+
+  document.getElementById('liveCal').style.width = pCal + '%';
+  document.getElementById('liveProt').style.width = pProt + '%';
+  document.getElementById('liveFibre').style.width = pFibre + '%';
+  document.getElementById('liveWater').style.width = pWater + '%';
+
+  document.getElementById('liveCalVal').textContent = `${Math.round(totalCal)} / ${TARGETS.cal}`;
+  document.getElementById('liveProtVal').textContent = `${totalProt.toFixed(1)}g / ${TARGETS.protein}g`;
+  document.getElementById('liveFibreVal').textContent = `${totalFibre.toFixed(1)}g / ${TARGETS.fibre}g`;
+  document.getElementById('liveWaterVal').textContent = `${water} / ${TARGETS.water}ml`;
+
+  if (totalCal > TARGETS.cal) document.getElementById('liveCal').style.background = 'var(--red)';
+}
+
+// ─── WEEKLY DATA ─────────────────────────────────────────────────────
+function getPeriodDates() {
+  return viewMode === 'week' ? getWeekDates(weekOffset) : getMonthDates(monthOffset);
+}
+
+function getWeekData() {
+  const periodDates = getPeriodDates();
+  const history = loadHistory();
+  const weightHistory = loadWeightHistory();
+  const live = loadLive();
+  const today = getTodayKey();
+
+  return periodDates.map(d => {
+    let data = getHistoryForDate(history, d.key) || {};
+    const wt = weightHistory.find(w => w.date === d.key) || {};
+
+    // For today, overlay live data
+    if (d.key === today) {
+      const bodyState = loadBodyState();
+      const totalCal = (live.foodCal || 0) + (live.suppsCal || 0);
+      const totalProt = (live.foodProtein || 0) + (live.suppsProtein || 0);
+      const totalFibre = (live.foodFibre || 0) + (live.suppsFibre || 0);
+      data = {
+        ...data,
+        foodCal: live.foodCal || data.foodCal || 0,
+        suppsCal: live.suppsCal || data.suppsCal || 0,
+        foodProtein: live.foodProtein || data.foodProtein || 0,
+        suppsProtein: live.suppsProtein || data.suppsProtein || 0,
+        foodFibre: live.foodFibre || data.foodFibre || 0,
+        suppsFibre: live.suppsFibre || data.suppsFibre || 0,
+        foodWater: live.foodWater || data.foodWater || 0,
+        foodAlcohol: live.foodAlcohol || data.foodAlcohol || 0,
+        burned: live.burned || bodyState.fitbit?.cal || data.burned || 0,
+        steps: live.steps || bodyState.fitbit?.steps || data.steps || 0,
+        dist: live.dist || data.dist || 0,
+        sleepHours: live.sleepHours || bodyState.sleep?.hours || data.sleepHours || 0,
+        weightAM: live.weightAM || bodyState.weight?.am?.val || wt.am || null,
+        weightPM: live.weightPM || bodyState.weight?.pm?.val || wt.pm || null,
+        exercise: live.exercise || bodyState.bw ? {
+          pushups: bodyState.bw?.pushups || 0,
+          crunches: bodyState.bw?.crunches || 0,
+          squats: bodyState.bw?.squats || 0,
+          lunges: bodyState.bw?.lunges || 0,
+          plank: bodyState.bw?.plank || 0,
+          skipping: bodyState.bw?.skipping || 0,
+          run: bodyState.cardio?.run || null,
+          hillrun: bodyState.cardio?.hillrun || null,
+          walk: bodyState.cardio?.walk || null,
+        } : data.exercise,
+      };
+    } else {
+      data.weightAM = data.weightAM || wt.am || null;
+      data.weightPM = data.weightPM || wt.pm || null;
+    }
+
+    const totalCal = (data.foodCal || 0) + (data.suppsCal || 0);
+    const totalProt = (data.foodProtein || 0) + (data.suppsProtein || 0);
+    const totalFibre = (data.foodFibre || 0) + (data.suppsFibre || 0);
+    const deficit = data.burned > 0 ? data.burned - totalCal : null;
+
+    return {
+      ...d,
+      totalCal,
+      totalProt,
+      totalFibre,
+      water: data.foodWater || 0,
+      alcohol: data.foodAlcohol || 0,
+      burned: data.burned || 0,
+      deficit,
+      steps: data.steps || 0,
+      dist: data.dist || 0,
+      sleepHours: data.sleepHours || 0,
+      weightAM: data.weightAM,
+      weightPM: data.weightPM,
+      exercise: data.exercise || {},
+      hasData: totalCal > 0 || data.burned > 0,
+      isToday: d.key === today,
+    };
+  });
+}
+
+// ─── CHARTS ──────────────────────────────────────────────────────────
+const chartDefaults = {
+  responsive: true,
+  plugins: { legend: { display: false }, tooltip: { backgroundColor: '#1c1c1c', borderColor: '#2a2a2a', borderWidth: 1, titleColor: '#666', bodyColor: '#e0e0e0' } },
+  scales: {
+    x: { grid: { color: '#1a1a1a' }, ticks: { color: '#555', font: { size: 10 } } },
+    y: { grid: { color: '#1a1a1a' }, ticks: { color: '#555', font: { size: 10 } } }
+  }
+};
+
+function makeChart(id, type, data, options) {
+  if (charts[id]) { charts[id].destroy(); }
+  charts[id] = new Chart(document.getElementById(id), { type, data, options: { ...chartDefaults, ...options } });
+}
+
+function renderCharts(weekData) {
+  const labels = weekData.map(d => d.label);
+
+  const n = weekData.length;
+
+  // Weight
+  const weightVals = [...weekData.map(d=>d.weightAM), ...weekData.map(d=>d.weightPM)].filter(Boolean);
+  const weightMin = weightVals.length ? Math.floor(Math.min(...weightVals) * 2)/2 - 0.5 : 70;
+  const weightMax = weightVals.length ? Math.ceil(Math.max(...weightVals) * 2)/2 + 0.5 : 80;
+
+  makeChart('weightChart', 'line', {
+    labels,
+    datasets: [
+      { label:'AM', data: weekData.map(d => d.weightAM), borderColor:'#c8ff47', backgroundColor:'rgba(200,255,71,0.06)', borderWidth:2, pointBackgroundColor:'#c8ff47', pointRadius: n > 10 ? 2 : 4, tension:0.3, spanGaps:true },
+      { label:'PM', data: weekData.map(d => d.weightPM), borderColor:'#a78bfa', backgroundColor:'rgba(167,139,250,0.06)', borderWidth:2, pointBackgroundColor:'#a78bfa', pointRadius: n > 10 ? 2 : 4, tension:0.3, spanGaps:true }
+    ]
+  }, { scales: { ...chartDefaults.scales, y: { ...chartDefaults.scales.y, min: weightMin, max: weightMax } } });
+
+  // Calories
+  makeChart('calChart', 'bar', {
+    labels,
+    datasets: [
+      { data: weekData.map(d => d.totalCal || null), backgroundColor: weekData.map(d => d.totalCal > TARGETS.cal ? 'rgba(255,79,79,0.75)' : 'rgba(200,255,71,0.75)'), borderRadius: 4 },
+      { type:'line', data: Array(n).fill(TARGETS.cal), borderColor:'#c8ff47', borderDash:[4,3], borderWidth:1.5, pointRadius:0, fill:false }
+    ]
+  }, {});
+
+  // Deficit
+  makeChart('deficitChart', 'bar', {
+    labels,
+    datasets: [{ data: weekData.map(d => d.deficit), backgroundColor: weekData.map(d => d.deficit === null ? '#1e1e1e' : d.deficit >= 0 ? 'rgba(71,255,145,0.75)' : 'rgba(255,79,79,0.75)'), borderRadius: 4 }]
+  }, {});
+
+  // Protein
+  makeChart('protChart', 'bar', {
+    labels,
+    datasets: [
+      { data: weekData.map(d => d.totalProt || null), backgroundColor: weekData.map(d => d.totalProt >= TARGETS.protein ? 'rgba(71,184,255,0.75)' : 'rgba(71,184,255,0.3)'), borderRadius: 3 },
+      { type:'line', data: Array(n).fill(TARGETS.protein), borderColor:'#47b8ff', borderDash:[4,3], borderWidth:1.5, pointRadius:0, fill:false }
+    ]
+  }, { scales: { ...chartDefaults.scales, x: { ...chartDefaults.scales.x, ticks: { ...chartDefaults.scales.x.ticks, font: { size: 9 } } } } });
+
+  // Fibre
+  makeChart('fibreChart', 'bar', {
+    labels,
+    datasets: [
+      { data: weekData.map(d => d.totalFibre || null), backgroundColor: weekData.map(d => d.totalFibre >= TARGETS.fibre ? 'rgba(71,255,145,0.75)' : 'rgba(71,255,145,0.3)'), borderRadius: 3 },
+      { type:'line', data: Array(n).fill(TARGETS.fibre), borderColor:'#47ff91', borderDash:[4,3], borderWidth:1.5, pointRadius:0, fill:false }
+    ]
+  }, { scales: { ...chartDefaults.scales, x: { ...chartDefaults.scales.x, ticks: { ...chartDefaults.scales.x.ticks, font: { size: 9 } } } } });
+
+  // Water
+  makeChart('waterChart', 'bar', {
+    labels,
+    datasets: [
+      { data: weekData.map(d => d.water || null), backgroundColor: weekData.map(d => d.water >= TARGETS.water ? 'rgba(167,139,250,0.75)' : 'rgba(167,139,250,0.3)'), borderRadius: 4 },
+      { type:'line', data: Array(n).fill(TARGETS.water), borderColor:'#a78bfa', borderDash:[4,3], borderWidth:1.5, pointRadius:0, fill:false }
+    ]
+  }, {});
+}
+
+// ─── ALCOHOL LOG ──────────────────────────────────────────────────────
+function renderAlcohol(weekData) {
+  const el = document.getElementById('alcoholLog');
+  el.innerHTML = weekData.map(d => {
+    const units = d.alcohol || 0;
+    const dots = units > 0 ? Array(Math.round(units)).fill('<div class="alc-dot"></div>').join('') : '<span class="alc-zero">none</span>';
+    return `<div class="alcohol-row"><div class="alc-day">${d.label}</div><div class="alc-dots">${dots}</div></div>`;
+  }).join('');
+}
+
+// ─── WEEK STATS ───────────────────────────────────────────────────────
+function renderWeekStats(weekData) {
+  const daysWithData = weekData.filter(d => d.hasData);
+  const avgCal = daysWithData.length ? Math.round(daysWithData.reduce((s,d) => s + d.totalCal, 0) / daysWithData.length) : 0;
+  const avgProt = daysWithData.length ? (daysWithData.reduce((s,d) => s + d.totalProt, 0) / daysWithData.length).toFixed(1) : 0;
+  const avgFibre = daysWithData.length ? (daysWithData.reduce((s,d) => s + d.totalFibre, 0) / daysWithData.length).toFixed(1) : 0;
+  const totalDeficit = weekData.filter(d => d.deficit !== null).reduce((s,d) => s + d.deficit, 0);
+  const totalAlcohol = weekData.reduce((s,d) => s + d.alcohol, 0);
+  const totalDist = weekData.reduce((s,d) => s + d.dist, 0).toFixed(2);
+  const weights = weekData.map(d => d.weightAM).filter(Boolean);
+  const weightChange = weights.length >= 2 ? (weights[weights.length-1] - weights[0]).toFixed(2) : null;
+  const avgWater = daysWithData.length ? Math.round(daysWithData.reduce((s,d) => s + d.water, 0) / daysWithData.length) : 0;
+
+  document.getElementById('weekStats').innerHTML = `
+    <div class="ws-cell">
+      <div class="ws-label">Total Deficit</div>
+      <div class="ws-val" style="color:${totalDeficit >= 0 ? 'var(--green)' : 'var(--red)'}">${totalDeficit >= 0 ? '+' : ''}${Math.round(totalDeficit)}</div>
+      <div class="ws-sub">cal</div>
+    </div>
+    <div class="ws-cell">
+      <div class="ws-label">Weight Δ</div>
+      <div class="ws-val" style="color:${weightChange === null ? 'var(--text-dim)' : parseFloat(weightChange) <= 0 ? 'var(--green)' : 'var(--red)'}">${weightChange !== null ? (parseFloat(weightChange) <= 0 ? '' : '+') + weightChange + 'kg' : '—'}</div>
+      <div class="ws-sub">${weights.length >= 2 ? weights[0] + ' → ' + weights[weights.length-1] : 'insufficient data'}</div>
+    </div>
+    <div class="ws-cell">
+      <div class="ws-label">Avg Cal</div>
+      <div class="ws-val" style="color:var(--accent)">${avgCal || '—'}</div>
+      <div class="ws-sub">target ${TARGETS.cal}</div>
+    </div>
+    <div class="ws-cell">
+      <div class="ws-label">Avg Protein</div>
+      <div class="ws-val" style="color:var(--blue)">${avgProt || '—'}g</div>
+      <div class="ws-sub">target ${TARGETS.protein}g</div>
+    </div>
+    <div class="ws-cell">
+      <div class="ws-label">Avg Fibre</div>
+      <div class="ws-val" style="color:var(--green)">${avgFibre || '—'}g</div>
+      <div class="ws-sub">target ${TARGETS.fibre}g</div>
+    </div>
+    <div class="ws-cell">
+      <div class="ws-label">Avg Water</div>
+      <div class="ws-val" style="color:var(--purple)">${avgWater ? (avgWater/1000).toFixed(1) + 'L' : '—'}</div>
+      <div class="ws-sub">target 3.5L</div>
+    </div>
+    <div class="ws-cell">
+      <div class="ws-label">Alcohol</div>
+      <div class="ws-val" style="color:${totalAlcohol > 0 ? 'var(--orange)' : 'var(--green)'}">${totalAlcohol}</div>
+      <div class="ws-sub">std drinks</div>
+    </div>
+    <div class="ws-cell">
+      <div class="ws-label">Distance</div>
+      <div class="ws-val" style="color:var(--text-mid)">${totalDist > 0 ? totalDist + 'km' : '—'}</div>
+      <div class="ws-sub">total</div>
+    </div>
+  `;
+}
+
+// ─── DAILY LOG TABLE ──────────────────────────────────────────────────
+function renderDailyLog(weekData) {
+  const today = getTodayKey();
+  document.getElementById('dailyLogRows').innerHTML = weekData.map(d => {
+    const isToday = d.key === today;
+    const calClass = d.totalCal > TARGETS.cal ? 'col-cal' : d.totalCal > 0 ? 'col-cal' : 'col-zero';
+    const defClass = d.deficit === null ? 'col-zero' : d.deficit >= 0 ? 'col-deficit' : 'col-deficit surplus';
+    return `<div class="day-row ${isToday ? 'today-row' : ''}">
+      <div class="day-col day-name" style="${isToday ? 'color:var(--accent)' : ''}">${d.label}${isToday ? ' ●' : ''}</div>
+      <div class="day-col ${calClass}">${d.totalCal > 0 ? Math.round(d.totalCal) : '—'}</div>
+      <div class="day-col col-prot">${d.totalProt > 0 ? d.totalProt.toFixed(0) + 'g' : '—'}</div>
+      <div class="day-col col-fibre">${d.totalFibre > 0 ? d.totalFibre.toFixed(0) + 'g' : '—'}</div>
+      <div class="day-col ${defClass}">${d.deficit !== null ? (d.deficit >= 0 ? '+' : '') + Math.round(d.deficit) : '—'}</div>
+    </div>`;
+  }).join('');
+}
+
+// ─── EXERCISE LOG ─────────────────────────────────────────────────────
+function renderExercise(weekData) {
+  document.getElementById('exerciseLog').innerHTML = weekData.map(d => {
+    const ex = d.exercise || {};
+    const tags = [];
+    if (ex.run?.dist > 0 || ex.run?.time > 0) tags.push(`<span class="ex-tag cardio">run ${ex.run.dist > 0 ? ex.run.dist+'km' : ''} ${ex.run.time > 0 ? ex.run.time+'min' : ''}</span>`);
+    if (ex.hillrun?.dist > 0 || ex.hillrun?.time > 0) tags.push(`<span class="ex-tag cardio">hill ${ex.hillrun.dist > 0 ? ex.hillrun.dist+'km' : ''} ${ex.hillrun.time > 0 ? ex.hillrun.time+'min' : ''}</span>`);
+    if (ex.walk?.dist > 0 || ex.walk?.time > 0) tags.push(`<span class="ex-tag cardio">walk ${ex.walk.dist > 0 ? ex.walk.dist+'km' : ''}</span>`);
+    if (ex.pushups > 0) tags.push(`<span class="ex-tag bw">${ex.pushups} push-ups</span>`);
+    if (ex.crunches > 0) tags.push(`<span class="ex-tag bw">${ex.crunches} crunches</span>`);
+    if (ex.squats > 0) tags.push(`<span class="ex-tag bw">${ex.squats} squats</span>`);
+    if (ex.lunges > 0) tags.push(`<span class="ex-tag bw">${ex.lunges} lunges</span>`);
+    if (ex.plank > 0) tags.push(`<span class="ex-tag bw">${ex.plank}min plank</span>`);
+    if (ex.skipping > 0) tags.push(`<span class="ex-tag bw">${ex.skipping}min skip</span>`);
+
+    return `<div class="ex-row">
+      <div class="ex-day">${d.label}</div>
+      <div class="ex-items">${tags.length > 0 ? tags.join('') : '<span class="ex-none">rest day</span>'}</div>
+    </div>`;
+  }).join('');
+}
+
+// ─── WEEK LABEL ───────────────────────────────────────────────────────
+function updateWeekLabel() {
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  if (viewMode === 'week') {
+    const dates = getWeekDates(weekOffset);
+    const start = dates[0].date;
+    const end = dates[6].date;
+    document.getElementById('weekLabel').textContent =
+      `${start.getDate()} ${months[start.getMonth()]} – ${end.getDate()} ${months[end.getMonth()]} ${end.getFullYear()}`;
+  } else {
+    const now = new Date();
+    const target = new Date(now.getFullYear(), now.getMonth() + monthOffset, 1);
+    document.getElementById('weekLabel').textContent =
+      `${months[target.getMonth()]} ${target.getFullYear()}`;
+  }
+}
+
+// ─── FULL RENDER ──────────────────────────────────────────────────────
+function renderAll() {
+  updateWeekLabel();
+  renderToday();
+  const weekData = getWeekData();
+  renderCharts(weekData);
+  renderAlcohol(weekData);
+  renderWeekStats(weekData);
+  renderDailyLog(weekData);
+  renderExercise(weekData);
+}
+
+function updateDate() {
+  const now = new Date();
+  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  document.getElementById('dateDisplay').textContent = `${days[now.getDay()]} ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+}
+
+// Auto-refresh every 60 seconds to pick up live changes
+setInterval(renderAll, 60000);
+
+updateDate();
+renderAll();
+</script>
+</body>
+</html>
