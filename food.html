@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Macros">
+<meta name="application-name" content="Macros">
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiB2aWV3Qm94PSIwIDAgMTkyIDE5MiI+CiAgPHJlY3Qgd2lkdGg9IjE5MiIgaGVpZ2h0PSIxOTIiIHJ4PSIzNiIgZmlsbD0iIzBmMGYwZiIvPgogIDxjaXJjbGUgY3g9Ijk2IiBjeT0iMTAwIiByPSI1OCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMWUxZTFlIiBzdHJva2Utd2lkdGg9IjQiLz4KICA8cGF0aCBkPSJNOTYgMTAwIEw5NiA0MiBBNTggNTggMCAwIDEgMTQ2LjIgNzEgWiIgZmlsbD0iI2M4ZmY0NyIvPgogIDxwYXRoIGQ9Ik05NiAxMDAgTDE0Ni4yIDcxIEE1OCA1OCAwIDAgMSAxNDYuMiAxMjkgWiIgZmlsbD0iIzQ3YjhmZiIvPgogIDxwYXRoIGQ9Ik05NiAxMDAgTDE0Ni4yIDEyOSBBNTggNTggMCAwIDEgOTYgMTU4IFoiIGZpbGw9IiM0N2ZmOTEiLz4KICA8cGF0aCBkPSJNOTYgMTAwIEw5NiAxNTggQTU4IDU4IDAgMSAxIDk2IDQyIFoiIGZpbGw9IiMxZTFlMWUiLz4KICA8Y2lyY2xlIGN4PSI5NiIgY3k9IjEwMCIgcj0iMjAiIGZpbGw9IiMwZjBmMGYiLz4KICA8bGluZSB4MT0iNTQiIHkxPSI2MCIgeDI9IjU0IiB5Mj0iODIiIHN0cm9rZT0iI2M4ZmY0NyIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxsaW5lIHgxPSI2MiIgeTE9IjYwIiB4Mj0iNjIiIHkyPSI4MiIgc3Ryb2tlPSIjYzhmZjQ3IiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPGxpbmUgeDE9IjcwIiB5MT0iNjAiIHgyPSI3MCIgeTI9IjgyIiBzdHJva2U9IiNjOGZmNDciIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNNTQgODIgUTYyIDkwIDcwIDgyIiBmaWxsPSJub25lIiBzdHJva2U9IiNjOGZmNDciIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8bGluZSB4MT0iNjIiIHkxPSI5MCIgeDI9IjYyIiB5Mj0iMTE1IiBzdHJva2U9IiNjOGZmNDciIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+">
+<title>Macros</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080808;
+    --surface: #111;
+    --surface2: #181818;
+    --border: #222;
+    --accent: #c8ff47;
+    --accent-dim: rgba(200,255,71,0.10);
+    --text: #e8e8e8;
+    --text-dim: #555;
+    --text-mid: #888;
+    --red: #ff4f4f;
+    --blue: #47b8ff;
+    --orange: #ffaa47;
+    --green: #47ff91;
+    --purple: #a78bfa;
+    --cal-color: #c8ff47;
+    --prot-color: #47b8ff;
+    --fibre-color: #47ff91;
+    --water-color: #a78bfa;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+    padding-bottom: 40px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  header {
+    padding: 18px 18px 12px;
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0;
+    background: var(--bg); z-index: 100;
+  }
+  .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .header-left h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; color: var(--accent); }
+  .header-left .date { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); margin-top: 2px; }
+
+  /* MACRO BARS */
+  .macro-bars { display: flex; flex-direction: column; gap: 6px; }
+  .macro-bar-row { display: flex; align-items: center; gap: 8px; }
+  .macro-bar-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; width: 44px; color: var(--text-dim); flex-shrink: 0; }
+  .macro-bar-track { flex: 1; height: 5px; background: var(--border); border-radius: 3px; overflow: visible; position: relative; }
+  .macro-bar-fill { height: 100%; border-radius: 3px; transition: width 0.3s ease; max-width: 100%; }
+  .macro-bar-fill.over { border-radius: 3px; }
+  .macro-bar-val { font-family: 'JetBrains Mono', monospace; font-size: 9px; width: 70px; text-align: right; flex-shrink: 0; }
+  .bar-cal { background: var(--cal-color); }
+  .bar-prot { background: var(--prot-color); }
+  .bar-fibre { background: var(--fibre-color); }
+  .bar-water { background: var(--water-color); }
+  .bar-over { background: var(--red); }
+
+  /* SEARCH */
+  .search-wrap { padding: 10px 18px; border-bottom: 1px solid var(--border); position: sticky; top: 103px; background: var(--bg); z-index: 99; }
+  .search-input {
+    width: 100%; padding: 10px 14px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; color: var(--text);
+    font-family: 'Syne', sans-serif; font-size: 14px;
+  }
+  .search-input:focus { outline: none; border-color: var(--accent); }
+  .search-input::placeholder { color: var(--text-dim); }
+
+  /* CATEGORY */
+  .category { border-bottom: 1px solid var(--border); }
+  .category-header { padding: 10px 18px 6px; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+  .cat-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .cat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; flex: 1; }
+  .cat-arrow { font-size: 10px; color: var(--text-dim); transition: transform 0.2s; }
+  .cat-arrow.open { transform: rotate(90deg); }
+  .cat-items { display: none; }
+  .cat-items.open { display: block; }
+
+  /* FOOD ITEM */
+  .food-item { border-top: 1px solid #161616; padding: 10px 18px 12px; }
+  .food-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px; }
+  .food-name { font-size: 14px; font-weight: 500; }
+  .food-macros { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); margin-top: 3px; }
+  .food-logged { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--accent); margin-top: 2px; min-height: 14px; }
+  .food-actions { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+
+  /* UNIT ITEMS (eggs, slices etc) */
+  .unit-btn {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    padding: 6px 12px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--surface);
+    color: var(--text-mid); cursor: pointer; transition: all 0.15s;
+  }
+  .unit-btn:active { transform: scale(0.95); background: var(--accent-dim); color: var(--accent); border-color: var(--accent); }
+
+  /* GRAM ITEMS */
+  .gram-btns { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+  .gram-btn {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    padding: 6px 10px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--surface);
+    color: var(--text-mid); cursor: pointer; transition: all 0.15s;
+  }
+  .gram-btn:active { transform: scale(0.95); }
+
+  .custom-wrap { display: flex; gap: 4px; }
+  .custom-inp {
+    width: 60px; padding: 6px 8px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; color: var(--text);
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; text-align: center;
+  }
+  .custom-inp:focus { outline: none; border-color: var(--accent); }
+  .custom-go {
+    padding: 6px 10px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--surface);
+    color: var(--text-mid); font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; cursor: pointer;
+  }
+  .custom-go:active { background: var(--accent-dim); color: var(--accent); border-color: var(--accent); }
+  .clear-btn {
+    padding: 5px 9px; border-radius: 8px;
+    border: 1px solid #1e1e1e; background: transparent;
+    color: #333; font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; cursor: pointer; margin-left: auto;
+  }
+  .clear-btn:active { color: var(--red); border-color: var(--red); }
+
+  /* WATER SECTION */
+  .water-section { border-bottom: 1px solid var(--border); padding: 14px 18px; }
+  .water-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .water-title { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--water-color); }
+  .water-amount { font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 500; color: var(--water-color); margin-left: auto; }
+  .water-target-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); }
+  .water-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+  .water-btn {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    padding: 8px 16px; border-radius: 8px;
+    border: 1px solid #a78bfa33; background: rgba(167,139,250,0.08);
+    color: var(--purple); cursor: pointer; transition: all 0.15s; flex: 1;
+  }
+  .water-btn:active { background: rgba(167,139,250,0.2); transform: scale(0.97); }
+  .water-clear { padding: 8px 12px; border-radius: 8px; border: 1px solid #1e1e1e; background: transparent; color: #333; font-family: 'JetBrains Mono', monospace; font-size: 10px; cursor: pointer; }
+  .water-clear:active { color: var(--red); border-color: var(--red); }
+
+  /* LOG SUMMARY */
+  .log-section { padding: 14px 18px; border-bottom: 1px solid var(--border); }
+  .log-title { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 10px; }
+  .log-entry { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #161616; font-size: 13px; }
+  .log-entry:last-child { border-bottom: none; }
+  .log-entry-name { color: var(--text-mid); flex: 1; }
+  .log-entry-macros { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-align: right; }
+  .log-empty { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #333; text-align: center; padding: 10px 0; }
+
+  /* TOTALS */
+  .totals-section { margin: 16px 18px; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+  .totals-header { background: var(--surface); padding: 12px 16px; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim); border-bottom: 1px solid var(--border); }
+  .totals-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .total-cell { padding: 14px 16px; border-bottom: 1px solid #161616; border-right: 1px solid #161616; }
+  .total-cell:nth-child(2n) { border-right: none; }
+  .total-cell:nth-last-child(-n+2) { border-bottom: none; }
+  .total-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+  .total-val { font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 500; line-height: 1; }
+  .total-target { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); margin-top: 3px; }
+  .val-cal { color: var(--cal-color); }
+  .val-prot { color: var(--prot-color); }
+  .val-fibre { color: var(--fibre-color); }
+  .val-water { color: var(--water-color); }
+  .val-over { color: var(--red); }
+
+  /* MANUAL ENTRY */
+  .manual-section { border-bottom: 1px solid var(--border); padding: 14px 18px; }
+  .manual-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .manual-title { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--orange); }
+  .manual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+  .manual-field { display: flex; flex-direction: column; gap: 4px; }
+  .manual-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); letter-spacing: 0.1em; }
+  .manual-inp {
+    padding: 8px 10px; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; color: var(--text); font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; width: 100%;
+  }
+  .manual-inp:focus { outline: none; border-color: var(--orange); }
+  .manual-name-inp {
+    width: 100%; padding: 8px 10px; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; color: var(--text); font-family: 'Syne', sans-serif; font-size: 13px;
+    margin-bottom: 8px;
+  }
+  .manual-name-inp:focus { outline: none; border-color: var(--orange); }
+  .manual-add-btn {
+    width: 100%; padding: 10px; border-radius: 8px;
+    border: 1px solid #ffaa4744; background: rgba(255,170,71,0.08);
+    color: var(--orange); font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.08em; cursor: pointer; transition: all 0.15s;
+  }
+  .manual-add-btn:active { background: rgba(255,170,71,0.2); }
+
+  /* RESET */
+  .reset-btn { display: block; width: calc(100% - 36px); margin: 4px 18px 4px; padding: 12px; background: transparent; border: 1px solid var(--border); border-radius: 10px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; cursor: pointer; transition: all 0.2s; }
+  .reset-btn:active { background: var(--surface); }
+  .note { margin: 6px 18px 20px; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #333; text-align: center; }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div class="header-left">
+      <h1>MACROS</h1>
+      <div class="date" id="dateDisplay"></div>
+    </div>
+  </div>
+  <div class="macro-bars">
+    <div class="macro-bar-row">
+      <div class="macro-bar-label" style="color:var(--cal-color)">cal</div>
+      <div class="macro-bar-track"><div class="macro-bar-fill bar-cal" id="barCal" style="width:0%"></div></div>
+      <div class="macro-bar-val" style="color:var(--cal-color)" id="valCal">0 / 1450</div>
+    </div>
+    <div class="macro-bar-row">
+      <div class="macro-bar-label" style="color:var(--prot-color)">protein</div>
+      <div class="macro-bar-track"><div class="macro-bar-fill bar-prot" id="barProt" style="width:0%"></div></div>
+      <div class="macro-bar-val" style="color:var(--prot-color)" id="valProt">0g / 150g</div>
+    </div>
+    <div class="macro-bar-row">
+      <div class="macro-bar-label" style="color:var(--fibre-color)">fibre</div>
+      <div class="macro-bar-track"><div class="macro-bar-fill bar-fibre" id="barFibre" style="width:0%"></div></div>
+      <div class="macro-bar-val" style="color:var(--fibre-color)" id="valFibre">0g / 50g</div>
+    </div>
+    <div class="macro-bar-row">
+      <div class="macro-bar-label" style="color:var(--water-color)">water</div>
+      <div class="macro-bar-track"><div class="macro-bar-fill bar-water" id="barWater" style="width:0%"></div></div>
+      <div class="macro-bar-val" style="color:var(--water-color)" id="valWater">0 / 3500ml</div>
+    </div>
+  </div>
+</header>
+
+<div class="search-wrap">
+  <input class="search-input" id="searchInput" type="text" placeholder="Search food..." oninput="filterFoods()">
+</div>
+
+<div id="foodList"></div>
+
+<!-- WATER -->
+<div class="water-section">
+  <div class="water-header">
+    <div class="cat-dot" style="background:var(--water-color)"></div>
+    <div class="water-title">Water</div>
+    <div style="margin-left:auto; text-align:right">
+      <div class="water-amount" id="waterDisplay">0ml</div>
+      <div class="water-target-label">target 3,500ml</div>
+    </div>
+  </div>
+  <div class="water-btns">
+    <button class="water-btn" onclick="addWater(50)">+50ml</button>
+    <button class="water-btn" onclick="addWater(100)">+100ml</button>
+    <button class="water-btn" onclick="addWater(250)">+250ml</button>
+    <button class="water-btn" onclick="addWater(600)">+600ml</button>
+    <button class="water-clear" onclick="clearWater()">✕</button>
+  </div>
+</div>
+
+<!-- LOG -->
+<div class="log-section">
+  <div class="log-title">Today's log</div>
+  <div id="logEntries"><div class="log-empty">nothing logged yet</div></div>
+</div>
+
+<!-- MANUAL ENTRY -->
+<div class="manual-section">
+  <div class="manual-header">
+    <div class="cat-dot" style="background:var(--orange)"></div>
+    <div class="manual-title">Manual Entry</div>
+  </div>
+  <input class="manual-name-inp" id="manualName" type="text" placeholder="Label (optional, e.g. 'leftover pasta')">
+  <div class="manual-grid">
+    <div class="manual-field">
+      <div class="manual-label">Calories</div>
+      <input class="manual-inp" id="manualCal" type="number" placeholder="0" min="0">
+    </div>
+    <div class="manual-field">
+      <div class="manual-label">Protein (g)</div>
+      <input class="manual-inp" id="manualProt" type="number" placeholder="0" min="0" step="0.1">
+    </div>
+    <div class="manual-field">
+      <div class="manual-label">Fibre (g)</div>
+      <input class="manual-inp" id="manualFibre" type="number" placeholder="0" min="0" step="0.1">
+    </div>
+  </div>
+  <button class="manual-add-btn" onclick="addManual()">+ add to today</button>
+</div>
+
+<!-- TOTALS -->
+<div class="totals-section">
+  <div class="totals-header">Daily Totals</div>
+  <div class="totals-grid">
+    <div class="total-cell">
+      <div class="total-label">Calories</div>
+      <div class="total-val val-cal" id="totCal">0</div>
+      <div class="total-target">target 1,450</div>
+    </div>
+    <div class="total-cell">
+      <div class="total-label">Protein</div>
+      <div class="total-val val-prot" id="totProt">0g</div>
+      <div class="total-target">target 150g</div>
+    </div>
+    <div class="total-cell">
+      <div class="total-label">Fibre</div>
+      <div class="total-val val-fibre" id="totFibre">0g</div>
+      <div class="total-target">target 50g</div>
+    </div>
+    <div class="total-cell">
+      <div class="total-label">Water</div>
+      <div class="total-val val-water" id="totWater">0ml</div>
+      <div class="total-target">target 3,500ml</div>
+    </div>
+  </div>
+</div>
+
+<button class="reset-btn" id="resetBtn" data-confirming="false" onclick="resetAll()">↺ reset for new day</button>
+<div class="note" id="lastReset"></div>
+<div style="height:30px"></div>
+
+<script>
+// ─── FOOD DATABASE ───────────────────────────────────────────────────
+// cal/protein/fibre are per 100g for gram-type, or per unit for unit-type
+// type: 'gram' or 'unit'
+// unitLabel: display name for one unit
+// unitGrams: equivalent grams per unit (for macro calc)
+// gramButtons: array of quick-add gram amounts
+
+const FOODS = [
+  // DRINKS
+  { cat:'drinks',   id:'coffee',    name:'Coffee',              type:'unit', unitLabel:'cup',    cal:104, protein:8.4,  fibre:0.8,  unitGrams:200 },
+  { cat:'drinks',   id:'wine',      name:'Wine (glass)',        type:'unit', unitLabel:'glass',  cal:120, protein:0,    fibre:0,    unitGrams:250 },
+
+  // PROTEIN & DAIRY
+  { cat:'protein',  id:'pea_prot',  name:'Pea Protein',         type:'gram', cal:420, protein:80.8, fibre:5.2,  gramButtons:[5,25,50] },
+  { cat:'protein',  id:'yogurt',    name:'Yogurt (FU Greek)',   type:'gram', cal:52,  protein:7.6,  fibre:0,    gramButtons:[5,10,75,100,150,200] },
+  { cat:'protein',  id:'egg',       name:'Egg',                 type:'unit', unitLabel:'egg',    cal:75,  protein:6,    fibre:0,    unitGrams:55 },
+  { cat:'protein',  id:'tuna',      name:'Tuna (canned)',       type:'gram', cal:164, protein:19,   fibre:0,    gramButtons:[42,84] },
+  { cat:'protein',  id:'biltong',   name:'Biltong',             type:'gram', cal:392, protein:44,   fibre:0,    gramButtons:[5,10,15,25] },
+  { cat:'protein',  id:'salmon',    name:'Smoked Salmon',       type:'gram', cal:139, protein:24.1, fibre:0,    gramButtons:[5,27,50,100] },
+  { cat:'protein',  id:'chkn_crumb',name:'Crumbed Chicken',     type:'gram', cal:212, protein:12.8, fibre:0,    gramButtons:[50,100,150] },
+  { cat:'protein',  id:'prot_gum',  name:'Protein Gummies',     type:'unit', unitLabel:'piece',  cal:17,  protein:2,    fibre:0,    unitGrams:5 },
+
+  // GRAINS & CARBS
+  { cat:'carbs',    id:'sourdough', name:'Sourdough',           type:'unit', unitLabel:'slice',  cal:130, protein:4,    fibre:2,    unitGrams:50 },
+  { cat:'carbs',    id:'wrap',      name:'High-Fibre Wrap',     type:'unit', unitLabel:'wrap',   cal:172, protein:13.6, fibre:11.7, unitGrams:70 },
+  { cat:'carbs',    id:'nv_bar',    name:'Nature Valley Bar',   type:'unit', unitLabel:'bar',    cal:197, protein:3,    fibre:2,    unitGrams:42 },
+
+  // FATS & TREATS
+  { cat:'fats',     id:'butter',    name:'Butter',              type:'gram', cal:717, protein:0.9,  fibre:0,    gramButtons:[5,10,15] },
+  { cat:'fats',     id:'cheddar',   name:'Cheddar',             type:'gram', cal:396, protein:25.2, fibre:0,    gramButtons:[5,15,25,40] },
+  { cat:'fats',     id:'dark_choc', name:'Dark Chocolate',      type:'gram', cal:520, protein:5.5,  fibre:0,    gramButtons:[5,10,20,25,50] },
+  { cat:'fats',     id:'chips',     name:'Chips',               type:'gram', cal:540, protein:6.7,  fibre:0.8,  gramButtons:[5,25,50] },
+
+  // FRUIT & VEG
+  { cat:'fruitveg', id:'apple',     name:'Apple',               type:'unit', unitLabel:'apple',  cal:80,  protein:0,    fibre:2,    unitGrams:150 },
+  { cat:'fruitveg', id:'cucumber',  name:'Cucumber',            type:'unit', unitLabel:'cucumber',cal:10, protein:0,    fibre:0.5,  unitGrams:100 },
+  { cat:'fruitveg', id:'grapes',    name:'Grapes',              type:'gram', cal:68,  protein:0.6,  fibre:0.9,  gramButtons:[10,30,60,100] },
+
+  // MEALS
+  { cat:'meals',    id:'soup',         name:'Chicken Lentil Soup',  type:'unit', unitLabel:'serve',  cal:300, protein:39,   fibre:8,    unitGrams:300, extraBtns:[{label:'½ serve', units:0.5}] },
+  { cat:'meals',    id:'heinz',        name:'Heinz Chunky Soup',    type:'unit', unitLabel:'serve',  cal:120, protein:8,    fibre:3,    unitGrams:265, extraBtns:[{label:'½ serve', units:0.5}] },
+  { cat:'meals',    id:'soup_quesadilla', name:'Soup Quesadilla',   type:'unit', unitLabel:'serve',  cal:434, protein:41.3, fibre:15.7, unitGrams:400 },
+  { cat:'meals',    id:'chkn_wrap',    name:'Chicken Salad Wrap',   type:'unit', unitLabel:'wrap',   cal:698, protein:39.6, fibre:15.2, unitGrams:500 },
+
+  // EXTRAS
+  { cat:'extras',   id:'olive_oil',    name:'Olive Oil',            type:'unit', unitLabel:'tbsp',   cal:119, protein:0,    fibre:0,    unitGrams:14 },
+  { cat:'extras',   id:'avocado',      name:'Avocado',              type:'unit', unitLabel:'¼ avo',  cal:80,  protein:1,    fibre:2.7,  unitGrams:50,  extraBtns:[{label:'½ avo', units:2}] },
+];
+
+const CATEGORIES = {
+  drinks:   { label:'Drinks',                  color:'#47b8ff' },
+  protein:  { label:'Protein & Dairy',         color:'#c8ff47' },
+  carbs:    { label:'Grains & Carbs',          color:'#ffaa47' },
+  fats:     { label:'Fats & Treats',           color:'#ff4f4f' },
+  fruitveg: { label:'Fruit & Veg',             color:'#47ff91' },
+  meals:    { label:'Meals',                   color:'#ff8c47' },
+  extras:   { label:'Extras',                  color:'#ff6eb4' },
+};
+
+const TARGETS = { cal: 1450, protein: 150, fibre: 50, water: 3500 };
+const KEY = 'macros_v1';
+
+function load() { try { return JSON.parse(localStorage.getItem(KEY)) || { foods: {}, water: 0 }; } catch { return { foods: {}, water: 0 }; } }
+function save(s) { localStorage.setItem(KEY, JSON.stringify(s)); }
+
+// ─── BUILD UI ────────────────────────────────────────────────────────
+function buildUI() {
+  const container = document.getElementById('foodList');
+  let html = '';
+  const cats = Object.keys(CATEGORIES);
+
+  cats.forEach(cat => {
+    const catFoods = FOODS.filter(f => f.cat === cat);
+    const catInfo = CATEGORIES[cat];
+    html += `<div class="category" id="cat_${cat}">
+      <div class="category-header" onclick="toggleCat('${cat}')">
+        <div class="cat-dot" style="background:${catInfo.color}"></div>
+        <div class="cat-label" style="color:${catInfo.color}">${catInfo.label}</div>
+        <div class="cat-arrow" id="arrow_${cat}">›</div>
+      </div>
+      <div class="cat-items" id="items_${cat}">`;
+
+    catFoods.forEach(food => {
+      const macroLabel = food.type === 'gram'
+        ? `per 100g: ${food.cal}cal · ${food.protein}g prot · ${food.fibre}g fibre`
+        : `per ${food.unitLabel}: ${food.cal}cal · ${food.protein}g prot · ${food.fibre}g fibre`;
+
+      let actionHTML = '';
+      if (food.type === 'unit') {
+        const extraBtnHTML = (food.extraBtns || []).map(b =>
+          `<button class="unit-btn" onclick="logUnitAmount('${food.id}',${b.units})">${b.label}</button>`
+        ).join('');
+        actionHTML = `<div class="food-actions">
+          <button class="unit-btn" onclick="logUnit('${food.id}',-1)">−1</button>
+          <button class="unit-btn" onclick="logUnit('${food.id}',1)">+1 ${food.unitLabel}</button>
+          ${extraBtnHTML}
+          <div class="custom-wrap">
+            <input class="custom-inp" id="custom_${food.id}" type="number" placeholder="?" step="0.5" min="0">
+            <button class="custom-go" onclick="logCustomUnit('${food.id}')">log</button>
+          </div>
+          <button class="clear-btn" onclick="clearFood('${food.id}')">✕</button>
+        </div>`;
+      } else {
+        const btns = food.gramButtons.map(g => `<button class="gram-btn" onclick="logGrams('${food.id}',${g})">${g}g</button>`).join('');
+        actionHTML = `<div class="food-actions">
+          ${btns}
+          <div class="custom-wrap">
+            <input class="custom-inp" id="custom_${food.id}" type="number" placeholder="g" step="1" min="0">
+            <button class="custom-go" onclick="logCustomGram('${food.id}')">log</button>
+          </div>
+          <button class="clear-btn" onclick="clearFood('${food.id}')">✕</button>
+        </div>`;
+      }
+
+      html += `<div class="food-item" id="fi_${food.id}">
+        <div class="food-top">
+          <div>
+            <div class="food-name">${food.name}</div>
+            <div class="food-macros">${macroLabel}</div>
+            <div class="food-logged" id="fl_${food.id}"></div>
+          </div>
+        </div>
+        ${actionHTML}
+      </div>`;
+    });
+
+    html += `</div></div>`;
+  });
+
+  container.innerHTML = html;
+}
+
+function toggleCat(cat) {
+  const items = document.getElementById('items_' + cat);
+  const arrow = document.getElementById('arrow_' + cat);
+  items.classList.toggle('open');
+  arrow.classList.toggle('open');
+}
+
+// ─── LOGGING ─────────────────────────────────────────────────────────
+function logGrams(id, g) {
+  const state = load();
+  if (!state.foods[id]) state.foods[id] = { grams: 0 };
+  state.foods[id].grams = (state.foods[id].grams || 0) + g;
+  save(state); render();
+}
+
+function logCustomGram(id) {
+  const inp = document.getElementById('custom_' + id);
+  const val = parseFloat(inp.value);
+  if (isNaN(val) || val <= 0) return;
+  logGrams(id, val);
+  inp.value = '';
+}
+
+function logUnitAmount(id, amount) {
+  const state = load();
+  if (!state.foods[id]) state.foods[id] = { units: 0 };
+  state.foods[id].units = (state.foods[id].units || 0) + amount;
+  save(state); render();
+}
+
+function logUnit(id, delta) {
+  const state = load();
+  if (!state.foods[id]) state.foods[id] = { units: 0 };
+  state.foods[id].units = Math.max(0, (state.foods[id].units || 0) + delta);
+  if (state.foods[id].units === 0) delete state.foods[id];
+  save(state); render();
+}
+
+function logCustomUnit(id) {
+  const inp = document.getElementById('custom_' + id);
+  const val = parseFloat(inp.value);
+  if (isNaN(val) || val <= 0) return;
+  const state = load();
+  if (!state.foods[id]) state.foods[id] = { units: 0 };
+  state.foods[id].units = (state.foods[id].units || 0) + val;
+  save(state); render();
+  inp.value = '';
+}
+
+function clearFood(id) {
+  const state = load();
+  delete state.foods[id];
+  save(state); render();
+}
+
+function addWater(ml) {
+  const state = load();
+  state.water = (state.water || 0) + ml;
+  save(state); render();
+}
+
+function clearWater() {
+  const state = load();
+  state.water = 0;
+  save(state); render();
+}
+
+// ─── RENDER ──────────────────────────────────────────────────────────
+function render() {
+  const state = load();
+  let totals = { cal: 0, protein: 0, fibre: 0 };
+  let logItems = [];
+
+  FOODS.forEach(food => {
+    const entry = state.foods[food.id];
+    const logEl = document.getElementById('fl_' + food.id);
+    if (!logEl) return;
+
+    if (entry) {
+      let cal = 0, protein = 0, fibre = 0, label = '';
+      if (food.type === 'gram') {
+        const g = entry.grams || 0;
+        cal = (food.cal / 100) * g;
+        protein = (food.protein / 100) * g;
+        fibre = (food.fibre / 100) * g;
+        label = `✓ ${g}g`;
+      } else {
+        const u = entry.units || 0;
+        cal = food.cal * u;
+        protein = food.protein * u;
+        fibre = food.fibre * u;
+        label = `✓ ${u} ${food.unitLabel}${u !== 1 ? 's' : ''}`;
+      }
+      logEl.textContent = label + ` · ${Math.round(cal)}cal · ${protein.toFixed(1)}g · ${fibre.toFixed(1)}g fibre`;
+      totals.cal += cal;
+      totals.protein += protein;
+      totals.fibre += fibre;
+      logItems.push({ name: food.name, cal, protein, fibre, label });
+    } else {
+      logEl.textContent = '';
+    }
+  });
+
+  const water = state.water || 0;
+
+  // Add manual entries to totals and log
+  const manuals = state.manual || [];
+  manuals.forEach(m => {
+    totals.cal += m.cal;
+    totals.protein += m.protein;
+    totals.fibre += m.fibre;
+    logItems.push({ name: m.name, cal: m.cal, protein: m.protein, fibre: m.fibre, manualId: m.id });
+  });
+
+  // Read supps contribution from shared daily_totals
+  let suppsTotals = { cal: 0, protein: 0, fibre: 0 };
+  try {
+    const shared = JSON.parse(localStorage.getItem('daily_totals')) || {};
+    suppsTotals.cal = shared.suppsCal || 0;
+    suppsTotals.protein = shared.suppsProtein || 0;
+    suppsTotals.fibre = shared.suppsFibre || 0;
+  } catch(e) {}
+
+  const combinedCal = totals.cal + suppsTotals.cal;
+  const combinedProt = totals.protein + suppsTotals.protein;
+  const combinedFibre = totals.fibre + suppsTotals.fibre;
+
+  // Header bars — combined
+  const pCal = Math.min((combinedCal / TARGETS.cal) * 100, 100);
+  const pProt = Math.min((combinedProt / TARGETS.protein) * 100, 100);
+  const pFibre = Math.min((combinedFibre / TARGETS.fibre) * 100, 100);
+  const pWater = Math.min((water / TARGETS.water) * 100, 100);
+
+  document.getElementById('barCal').style.width = pCal + '%';
+  document.getElementById('barProt').style.width = pProt + '%';
+  document.getElementById('barFibre').style.width = pFibre + '%';
+  document.getElementById('barWater').style.width = pWater + '%';
+
+  document.getElementById('valCal').textContent = `${Math.round(combinedCal)} / ${TARGETS.cal}`;
+  document.getElementById('valProt').textContent = `${combinedProt.toFixed(1)}g / ${TARGETS.protein}g`;
+  document.getElementById('valFibre').textContent = `${combinedFibre.toFixed(1)}g / ${TARGETS.fibre}g`;
+  document.getElementById('valWater').textContent = `${water} / ${TARGETS.water}ml`;
+
+  // Bar colours when over target
+  document.getElementById('barCal').className = `macro-bar-fill ${combinedCal > TARGETS.cal ? 'bar-over' : 'bar-cal'}`;
+
+  // Water display
+  document.getElementById('waterDisplay').textContent = water + 'ml';
+
+  // Totals — combined
+  document.getElementById('totCal').textContent = Math.round(combinedCal);
+  document.getElementById('totCal').className = `total-val ${combinedCal > TARGETS.cal ? 'val-over' : 'val-cal'}`;
+  document.getElementById('totProt').textContent = combinedProt.toFixed(1) + 'g';
+  document.getElementById('totFibre').textContent = combinedFibre.toFixed(1) + 'g';
+  document.getElementById('totWater').textContent = water + 'ml';
+
+  // Log entries
+  const logEl = document.getElementById('logEntries');
+  if (logItems.length === 0) {
+    logEl.innerHTML = '<div class="log-empty">nothing logged yet</div>';
+  } else {
+    logEl.innerHTML = logItems.map(item => `
+      <div class="log-entry">
+        <div class="log-entry-name">${item.name}${item.manualId ? ' <span style="color:#333;font-size:9px;font-family:JetBrains Mono,monospace">manual</span>' : ''}</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div class="log-entry-macros">${Math.round(item.cal)}cal · ${item.protein.toFixed(1)}g · ${item.fibre.toFixed(1)}g fibre</div>
+          ${item.manualId ? `<button onclick="removeManual(${item.manualId})" style="background:none;border:none;color:#333;font-size:11px;cursor:pointer;padding:0 4px">✕</button>` : ''}
+        </div>
+      </div>
+    `).join('');
+  }
+  // Write live totals for recap app
+  writeLiveTotals(totals, water);
+}
+
+// ─── SHARED DAILY TOTALS (for recap app) ─────────────────────────────
+function getTodayKey() {
+  const now = new Date();
+  return `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+}
+
+function writeLiveTotals(totals, water) {
+  // Write live food totals so recap can read in real time
+  try {
+    const existing = JSON.parse(localStorage.getItem('daily_totals')) || {};
+    existing.foodCal = Math.round(totals.cal);
+    existing.foodProtein = parseFloat(totals.protein.toFixed(1));
+    existing.foodFibre = parseFloat(totals.fibre.toFixed(1));
+    existing.foodWater = water;
+    // Count alcohol units (wine)
+    const state = load();
+    const wineEntry = state.foods?.wine;
+    existing.foodAlcohol = wineEntry?.units || 0;
+    existing.date = getTodayKey();
+    localStorage.setItem('daily_totals', JSON.stringify(existing));
+  } catch(e) {}
+}
+
+function snapshotToHistory(totals, water) {
+  // Save completed day to history before reset
+  try {
+    const history = JSON.parse(localStorage.getItem('daily_history')) || [];
+    const today = getTodayKey();
+    const state = load();
+    const wineEntry = state.foods?.wine;
+    const entry = {
+      date: today,
+      foodCal: Math.round(totals.cal),
+      foodProtein: parseFloat(totals.protein.toFixed(1)),
+      foodFibre: parseFloat(totals.fibre.toFixed(1)),
+      foodWater: water,
+      foodAlcohol: wineEntry?.units || 0,
+    };
+    const idx = history.findIndex(d => d.date === today);
+    if (idx >= 0) {
+      history[idx] = { ...history[idx], ...entry };
+    } else {
+      history.push(entry);
+    }
+    // Keep 60 days
+    if (history.length > 60) history.splice(0, history.length - 60);
+    localStorage.setItem('daily_history', JSON.stringify(history));
+  } catch(e) {}
+}
+
+
+function filterFoods() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  FOODS.forEach(food => {
+    const el = document.getElementById('fi_' + food.id);
+    if (!el) return;
+    el.classList.toggle('hidden', q.length > 0 && !food.name.toLowerCase().includes(q));
+  });
+  // Show/hide categories
+  Object.keys(CATEGORIES).forEach(cat => {
+    const catEl = document.getElementById('cat_' + cat);
+    const catFoods = FOODS.filter(f => f.cat === cat);
+    const anyVisible = catFoods.some(f => {
+      const el = document.getElementById('fi_' + f.id);
+      return el && !el.classList.contains('hidden');
+    });
+    if (catEl) catEl.classList.toggle('hidden', !anyVisible);
+    // Auto-open matching categories when searching
+    if (q.length > 0 && anyVisible) {
+      document.getElementById('items_' + cat)?.classList.add('open');
+      document.getElementById('arrow_' + cat)?.classList.add('open');
+    }
+  });
+}
+
+function addManual() {
+  const name = document.getElementById('manualName').value.trim() || 'Manual entry';
+  const cal = parseFloat(document.getElementById('manualCal').value) || 0;
+  const protein = parseFloat(document.getElementById('manualProt').value) || 0;
+  const fibre = parseFloat(document.getElementById('manualFibre').value) || 0;
+  if (cal === 0 && protein === 0 && fibre === 0) return;
+  const state = load();
+  if (!state.manual) state.manual = [];
+  state.manual.push({ name, cal, protein, fibre, id: Date.now() });
+  save(state);
+  // Clear inputs
+  document.getElementById('manualName').value = '';
+  document.getElementById('manualCal').value = '';
+  document.getElementById('manualProt').value = '';
+  document.getElementById('manualFibre').value = '';
+  render();
+}
+
+function removeManual(id) {
+  const state = load();
+  state.manual = (state.manual || []).filter(e => e.id !== id);
+  save(state); render();
+}
+
+
+function resetAll() {
+  const btn = document.getElementById('resetBtn');
+  if (btn.dataset.confirming === 'true') {
+    const now = new Date().toLocaleString('en-AU', { hour:'2-digit', minute:'2-digit', day:'numeric', month:'short' });
+    localStorage.setItem('last_reset_food', now);
+    // Snapshot before wiping
+    const state = load();
+    const totals = { cal: 0, protein: 0, fibre: 0 };
+    FOODS.forEach(food => {
+      const entry = state.foods?.[food.id];
+      if (entry) {
+        if (food.type === 'gram') {
+          const g = entry.grams || 0;
+          totals.cal += (food.cal / 100) * g;
+          totals.protein += (food.protein / 100) * g;
+          totals.fibre += (food.fibre / 100) * g;
+        } else {
+          const u = entry.units || 0;
+          totals.cal += food.cal * u;
+          totals.protein += food.protein * u;
+          totals.fibre += food.fibre * u;
+        }
+      }
+    });
+    (state.manual || []).forEach(m => { totals.cal += m.cal; totals.protein += m.protein; totals.fibre += m.fibre; });
+    snapshotToHistory(totals, state.water || 0);
+    save({ foods: {}, water: 0, manual: [] });
+    render();
+    document.getElementById('lastReset').textContent = `last reset ${now}`;
+    btn.textContent = '↺ reset for new day';
+    btn.dataset.confirming = 'false';
+    btn.style.color = '';
+    btn.style.borderColor = '';
+  } else {
+    btn.dataset.confirming = 'true';
+    btn.textContent = 'tap again to confirm reset';
+    btn.style.color = 'var(--red)';
+    btn.style.borderColor = 'var(--red)';
+    setTimeout(() => {
+      btn.dataset.confirming = 'false';
+      btn.textContent = '↺ reset for new day';
+      btn.style.color = '';
+      btn.style.borderColor = '';
+    }, 3000);
+  }
+}
+
+function updateDate() {
+  const now = new Date();
+  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  document.getElementById('dateDisplay').textContent = `${days[now.getDay()]} ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────
+buildUI();
+updateDate();
+render();
+const lr = localStorage.getItem('last_reset_food');
+if (lr) document.getElementById('lastReset').textContent = `last reset ${lr}`;
+</script>
+</body>
+</html>
